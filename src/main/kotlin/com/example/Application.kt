@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
     else if (args[0] == "--port"){
         val a: Int? = try {
             val p = args[1].toInt()
-            if (p in 1..9999) p else throw RuntimeException("Incorrect port")
+            if (p in 0..65536) p else throw RuntimeException("Incorrect port")
         } catch (e: NumberFormatException) {
             throw RuntimeException("Incorrect port")
         }
