@@ -24,7 +24,7 @@ fun Application.configureRouting() {
     }
 
     routing {
-        get("/*") {
+        get("/") {
             call.request.queryParameters["length"]?.let { length ->
                 try {
                     val randStr = randomString(length.toInt())
@@ -45,6 +45,8 @@ fun Application.configureRouting() {
                     }
                 }
             }
+        }
+        get("/*") {
             call.request.let { _ -> call.respond(HttpStatusCode.NotFound, "no page found!") }
         }
     }
