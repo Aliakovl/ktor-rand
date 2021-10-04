@@ -6,6 +6,7 @@ import io.ktor.http.*
 import io.ktor.application.*
 import io.ktor.response.*
 import java.io.File
+import java.lang.IllegalArgumentException
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -42,6 +43,8 @@ fun Application.configureRouting() {
                         call.respondText(randInt, ContentType.Text.Plain, HttpStatusCode.OK)
                     } catch (e: NumberFormatException){
                         call.respond(HttpStatusCode.BadRequest, "to large begin or end")
+                    } catch (e: IllegalArgumentException){
+                        call.respond(HttpStatusCode.BadRequest, "end must be greater than begin or equal")
                     }
                 }
             }
