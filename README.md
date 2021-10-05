@@ -1,10 +1,18 @@
 # ktor-rand
 
-Параметры запуска сервера:
+## Варианты запуска ktor-rand
+
+1) Build: ``./gradlew build && ./gradlew installDist``
+
+    Run: ``./build/install/ktor-rand/bin/ktor-rand --port 8888``
+
+2) Build and run in docker container: ``./run.docker.sh``
+
+### Параметры запуска сервера:
 
   ``--port`` ``0..65536``
 
-Примеры запросов:
+### Примеры запросов:
 
 ``curl -i -X GET "localhost:8080/?begin=a&end=b"``,
 
