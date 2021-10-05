@@ -4,7 +4,7 @@
 
 1) Build: ``./gradlew build && ./gradlew installDist``
 
-    Run: ``./build/install/ktor-rand/bin/ktor-rand --port 8888``
+    Run: ``./build/install/ktor-rand/bin/ktor-rand --port 8080``
 
 2) Build and run in docker container: ``./run.docker.sh``
 
