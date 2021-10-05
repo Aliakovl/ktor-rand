@@ -32,7 +32,7 @@ fun Application.configureRouting() {
                     call.respondText(randStr, ContentType.Text.Plain, HttpStatusCode.OK)
                     File("log").appendText("${getFormattedDate()} - $randStr\n")
                 } catch (e: NumberFormatException){
-                    call.respond(HttpStatusCode.BadRequest, "to large length")
+                    call.respond(HttpStatusCode.BadRequest, "To large length")
                 }
             }
             call.request.queryParameters["begin"]?.let { begin ->
@@ -42,15 +42,15 @@ fun Application.configureRouting() {
                         File("log").appendText("${getFormattedDate()} - $randInt\n")
                         call.respondText(randInt, ContentType.Text.Plain, HttpStatusCode.OK)
                     } catch (e: NumberFormatException){
-                        call.respond(HttpStatusCode.BadRequest, "to large begin or end")
+                        call.respond(HttpStatusCode.BadRequest, "To large begin or end")
                     } catch (e: IllegalArgumentException){
-                        call.respond(HttpStatusCode.BadRequest, "end must be greater than begin or equal")
+                        call.respond(HttpStatusCode.BadRequest, "End must be greater than begin or equal")
                     }
                 }
             }
         }
         get("/*") {
-            call.request.let { _ -> call.respond(HttpStatusCode.NotFound, "no page found!") }
+            call.request.let { _ -> call.respond(HttpStatusCode.NotFound, "No page found!") }
         }
     }
 }
