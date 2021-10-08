@@ -15,7 +15,7 @@ fun Application.configureRouting() {
     val charPool : List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
 
     fun randomString(x: Int) = (1..x)
-        .map { _ -> Random.nextInt(0, charPool.size) }
+        .map { Random.nextInt(0, charPool.size) }
         .map(charPool::get)
         .joinToString("")
 
@@ -32,7 +32,7 @@ fun Application.configureRouting() {
                     call.respondText(randStr, ContentType.Text.Plain, HttpStatusCode.OK)
                     File("log").appendText("${getFormattedDate()} - $randStr\n")
                 } catch (e: NumberFormatException){
-                    call.respond(HttpStatusCode.BadRequest, "To large length")
+                    call.respond(HttpStatusCode.BadRequest, "Incorrect length")
                 }
             }
             call.request.queryParameters["begin"]?.let { begin ->
@@ -42,15 +42,24 @@ fun Application.configureRouting() {
                         File("log").appendText("${getFormattedDate()} - $randInt\n")
                         call.respondText(randInt, ContentType.Text.Plain, HttpStatusCode.OK)
                     } catch (e: NumberFormatException){
-                        call.respond(HttpStatusCode.BadRequest, "To large begin or end")
+                        call.respond(HttpStatusCode.BadRequest, "Incorrect begin or end")
                     } catch (e: IllegalArgumentException){
                         call.respond(HttpStatusCode.BadRequest, "End must be greater than begin or equal")
                     }
                 }
             }
         }
+        get("/log") {
+            val logFile = File("log")
+            if (logFile.isFile) {
+                call.respondFile(logFile)
+            }
+            else {
+                call.respond(HttpStatusCode.BadRequest, "Log file doesn't exist")
+            }
+        }
         get("/*") {
-            call.request.let { _ -> call.respond(HttpStatusCode.NotFound, "No page found!") }
+            call.request.let { call.respond(HttpStatusCode.NotFound, "No page found!") }
         }
     }
 }
