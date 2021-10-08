@@ -19,3 +19,7 @@
 ``curl -i -X GET "localhost:8080/?length=l"``,
 
 где _a_, _b_ и _l_ &mdash; числа от 0 до 2147483647.
+
+#### Для получения файла с логами:
+
+``curl -i -X GET "localhost:8080/log"``
